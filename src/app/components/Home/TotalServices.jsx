@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import TotalServicesCard from '@/app/utils/TotalServicesCard';
 import getRequest from "@/app/utils/api/getRequest";
+import GradientText from "@/app/utils/GradientText";
 const TotalServices = () => {
     const [page, setPage] = useState(0);
       const [cardWidth, setCardWidth] = useState(12); // default for base
@@ -97,9 +98,20 @@ const TotalServices = () => {
     <div className="flex flex-col gap-5 lg:gap-10 py-[2vw]">
     <div className="flex justify-between">
       {" "}
-      <h1 className="lg:text-3xl text-xl lg:w-[20vw] border-b-2 border-[#008ecc] lg:pb-4">
-        Нийт үйлчилгээ
-      </h1>
+          <GradientText
+                        colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+                        animationSpeed={8}
+                        showBorder={false}
+                        className="custom-class animate-gradient"
+                      >
+                        <h1 className="lg:text-3xl text-xl lg:w-auto border border-blue-500 p-2 rounded-2xl">
+                           Нийт үйлчилгээ
+                          {/* <span className="lg:text-3xl text-[#008ecc]">Байгууллага</span> */}
+                        </h1>
+                      </GradientText>
+      {/* <h1 className="lg:text-3xl text-xl lg:w-[20vw] border-b-2 border-[#008ecc] lg:pb-4">
+       
+      </h1> */}
       <div className="relative flex gap-10">
         <div className=" gap-4 lg:flex hidden">
           <button
@@ -109,7 +121,7 @@ const TotalServices = () => {
               page === 0 ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
-            <ChevronLeft size={20} className="text-black z-50" />
+            <ChevronLeft size={20} className="text-[#40ffaa] z-50" />
           </button>
           <button
             onClick={nextSlide}
@@ -118,16 +130,16 @@ const TotalServices = () => {
               page === maxPage ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
-            <ChevronRight size={20} className="text-black z-50" />
+            <ChevronRight size={20} className="text-[#40ffaa] z-50" />
           </button>
         </div>
-       <p className="flex items-center lg:text-xl gap-1 lg:gap-2 bg-white rounded-full shadow-md hover:bg-gray-100 pl-2 lg:pl-4 lg:pr-3 cursor-pointer">
+       <p className="flex items-center lg:text-xl gap-1 lg:gap-2 bg-white rounded-full shadow-md hover:bg-gray-100 pl-2 lg:pl-4 lg:pr-3 cursor-pointer  hover:text-[#008ecc] text-transparent duration-300 bg-gradient-to-r from-[#40ffaa] to-[#4079ff] bg-clip-text animate-gradient">
                    view all{" "}
                    <MdKeyboardArrowRight className="lg:size-5 text-[#008ecc]" />
                  </p>
       </div>
     </div>
-    <div className="overflow-hidden w-full ">
+    <div className="overflow w-full ">
     <motion.div
 className="flex w-full  gap-4 lg:gap-16"
 animate={{
@@ -138,15 +150,15 @@ drag="x"
 dragConstraints={{ left: 0, right: 0 }}
 onDragEnd={handleDragEnd}
 >
-{datas.map((el, index) => (
+{Array.from({length: 5}).map((_, index) => (
   <motion.div
     key={index}
     className="lg:w-[12vw] w-[20vw] flex-shrink-0"
   >
     <TotalServicesCard
-        category={el.category}
-        title={el.title}
-        covers={el.covers[0]}
+        // category={el.category}
+        // title={el.title}
+        // covers={el.covers[0]}
     />
   </motion.div>
 ))}

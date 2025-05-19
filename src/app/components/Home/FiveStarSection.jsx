@@ -11,8 +11,8 @@ import Iridescence from "@/app/utils/Iridescence";
 import getRequest from "@/app/utils/api/getRequest";
 // const CARD_WIDTH = 28; // vw
 // const GAP_PX = 48; // Tailwind gap-12 = 3rem
-import backgroundVariants from "@/app/components/backgroundVariants"
-
+import backgroundVariants from "@/app/components/backgroundVariants";
+import GradientText from "../../utils/GradientText";
 
 const FiveStarSection = () => {
   const [instant, setInstant] = useState(false);
@@ -21,20 +21,23 @@ const FiveStarSection = () => {
   const intervalRef = useRef(null);
   const [page, setPage] = useState(0);
   const [cardWidth, setCardWidth] = useState(16); // default for base
-  const [gapPx, setGapPx] = useState( 40);
-    const [itemsPerPage, setItemsPerPage] = useState(1);
+  const [gapPx, setGapPx] = useState(40);
+  const [itemsPerPage, setItemsPerPage] = useState(1);
 
   // Clone эхний 3 картыг төгсгөлд нэмнэ
   const extendedData = [...datas, ...datas.slice(0, 4)];
 
   useEffect(() => {
-    if(isLoading){
-      getRequest({route: '/fivestarcompany', setValue: setDatas, setIsLoading: setIsLoading})
+    if (isLoading) {
+      getRequest({
+        route: "/fivestarcompany",
+        setValue: setDatas,
+        setIsLoading: setIsLoading,
+      });
     }
-  }, [isLoading])
+  }, [isLoading]);
   // console.log(datas)
- 
-  
+
   // const nextSlide = () => {
   //   setPage((prev) => prev + 1);
   // };
@@ -57,7 +60,7 @@ const FiveStarSection = () => {
       if (window.innerWidth >= 1024) {
         // Tailwind 'lg' is 1024px+
         setCardWidth(16);
-        setGapPx( 40);
+        setGapPx(40);
       } else {
         setCardWidth(42);
         setGapPx(16);
@@ -68,35 +71,34 @@ const FiveStarSection = () => {
     return () => window.removeEventListener("resize", updateSizes);
   }, []);
 
-    useEffect(() => {
-      const handleResize = () => {
-        const vw = window.innerWidth;
-        if (vw >= 1024) {
-          // Desktop: lg:w-[12vw]
-          setItemsPerPage(Math.floor(100 / 12)); // ≈8
-        } else {
-          // Mobile: w-[20vw]
-          setItemsPerPage(Math.floor(100 / 20)); // ≈5
-        }
-      };
-  
-      handleResize(); // Run once on mount
-      window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
-    }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      const vw = window.innerWidth;
+      if (vw >= 1024) {
+        // Desktop: lg:w-[12vw]
+        setItemsPerPage(Math.floor(100 / 12)); // ≈8
+      } else {
+        // Mobile: w-[20vw]
+        setItemsPerPage(Math.floor(100 / 20)); // ≈5
+      }
+    };
+
+    handleResize(); // Run once on mount
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   const maxPage = Math.ceil(datas.length) - 1;
 
   const prevSlide = () => {
     if (page > 0) setPage((prev) => prev - 1);
   };
 
-const nextSlide = () => {
-// alert(page)
-  if (page < maxPage) {
-    setPage((prev) => prev + 1);
-  }
-};
-
+  const nextSlide = () => {
+    // alert(page)
+    if (page < maxPage) {
+      setPage((prev) => prev + 1);
+    }
+  };
 
   // useEffect(() => {
   //   intervalRef.current = setInterval(() => {
@@ -116,15 +118,15 @@ const nextSlide = () => {
   //   }
   // }, [page]);
 
-const randomizedBackgrounds = useMemo(() => {
-  return datas.map((_, index) => {
-    return backgroundVariants[index % backgroundVariants.length];
-  });
-}, [datas]);
+  const randomizedBackgrounds = useMemo(() => {
+    return datas.map((_, index) => {
+      return backgroundVariants[index % backgroundVariants.length];
+    });
+  }, [datas]);
 
   return (
     <div className="flex flex-col gap-5 lg:gap-10 py-[1vw]">
-            {/* <Iridescence
+      {/* <Iridescence
   color={[1, 1, 1]}
   mouseReact={false}
   amplitude={0.1}
@@ -132,10 +134,18 @@ const randomizedBackgrounds = useMemo(() => {
 /> */}
       {/* Header */}
       <div className="flex justify-between">
-        <h1 className="lg:text-3xl text-xl lg:w-[20vw] border-b-2 border-[#008ecc] lg:pb-4">
-          5 одтой{" "}
-          <span className="lg:text-3xl text-[#008ecc]">Байгууллага</span>
-        </h1>
+        <GradientText
+          colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+          animationSpeed={8}
+          showBorder={false}
+          className="custom-class animate-gradient"
+        >
+          <h1 className="lg:text-3xl text-xl lg:w-auto border border-blue-500 p-2 rounded-2xl">
+            Хамтрагч байгууллагууд
+            {/* <span className="lg:text-3xl text-[#008ecc]">Байгууллага</span> */}
+          </h1>
+        </GradientText>
+
         {/* <div id="realstar">
           <div class="star-container1">
             <div class="star-shape1">
@@ -151,27 +161,27 @@ const randomizedBackgrounds = useMemo(() => {
               onClick={prevSlide}
               disabled={page === 0}
               className={`bg-white shadow-md rounded-full px-4 hover:bg-gray-100 ${
-                page === 0 ? "opacity-50 cursor-not-allowed" : ""
+                page === 0 ? "opacity-50 cursor-not-allowed " : ""
               }`}
             >
-              <ChevronLeft size={20} className="text-black z-50" />
+              <ChevronLeft size={20} className="text-[#40ffaa] z-50" />
             </button>
             <button
-             disabled={page === maxPage}
+              disabled={page === maxPage}
               onClick={nextSlide}
               className={`bg-white shadow-md rounded-full px-4 hover:bg-gray-100 ${
                 page === maxPage ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
-              <ChevronRight size={20} className="text-black z-50" />
+              <ChevronRight size={20} className="text-[#40ffaa] z-50" />
             </button>
           </div>
           <Link
             href={"/business-category"}
-            className="flex items-center lg:text-xl gap-1 lg:gap-2 bg-white rounded-full shadow-md hover:bg-gray-100 pl-2 lg:pl-4 lg:pr-3 cursor-pointer"
+            className="flex items-center lg:text-xl gap-1 lg:gap-2 bg-white rounded-full shadow-md hover:bg-gray-100 pl-2 lg:pl-4 lg:pr-3 cursor-pointer  hover:text-[#008ecc] text-transparent duration-300 bg-gradient-to-r from-[#40ffaa] to-[#4079ff] bg-clip-text animate-gradient"
           >
             view all
-            <MdKeyboardArrowRight className="lg:size-5 text-[#008ecc]" />
+            <MdKeyboardArrowRight className="lg:size-5 text-[#40ffaa]" />
           </Link>
         </div>
       </div>
@@ -216,7 +226,9 @@ const randomizedBackgrounds = useMemo(() => {
                   image={el.image}
                   bgcolor={el.bgcolor}
                   labelcolor={el.labelcolor}
-                  background={randomizedBackgrounds[index % randomizedBackgrounds.length]} // loop protection
+                  background={
+                    randomizedBackgrounds[index % randomizedBackgrounds.length]
+                  } // loop protection
                 />
               </motion.div>
             ))}

@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import getRequest from "./api/getRequest";
 import apiData from "@/data/apidata";
+import Particles from "./Particles";
 
 const CustomSwiper = ({ darkmode = false }) => {
   const [page, setPage] = useState(0);
@@ -44,6 +45,18 @@ console.log(sliders)
 
   return (
     <div className="relative">
+      <div className="absolute inset-0 z-10 w-full h-full ">
+  <Particles
+    particleColors={['#ffffff', '#ffffff']}
+    particleCount={200}
+    particleSpread={10}
+    speed={0.1}
+    particleBaseSize={100}
+    moveParticlesOnHover={true}
+    alphaParticles={false}
+    disableRotation={false}
+  />
+</div>
       <button
         onClick={prevSlide}
         className="absolute -left-5  lg:-left-10 top-1/2 -translate-y-1/2 z-30 bg-white shadow-md rounded-full p-2 lg:p-7 hover:bg-gray-100 "
@@ -88,9 +101,7 @@ console.log(sliders)
                   </p>
                 </div>
                 <img src={apiData.file_api_url + testimonial.image} alt="" className="size-72 z-20" />
-                <div className="hidden lg:block absolute size-120 border-4 border-[#0c9bda] p-5 bg-[#008ecc] -top-80 -right-0 rounded-full z-10">
-          <div className="w-full h-full border-4 border-[#0c9bda] p-10 bg-[#0c9bda] rounded-full"></div>
-        </div>
+               
               </div>
             </motion.div>
           ))}

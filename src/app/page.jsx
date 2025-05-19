@@ -26,7 +26,7 @@ export default function Home() {
       <MainHeader mobileMenuOpen={mobileMenuOpen}  setMobileMenuOpen={setMobileMenuOpen} hoveredMenu={hoveredMenu}  setHoveredMenu={setHoveredMenu}/>
       <CategoryTitles  />
       <CustomSwiper />
-      <VipAds />
+      {/* <VipAds /> */}
       <VIPSection />
       <CategorySection/>
       <FiveStarSection/>

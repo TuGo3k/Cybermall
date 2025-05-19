@@ -9,7 +9,7 @@ export default function FiveStarCard({
   background,
 }) {
   const Star = () => (
-    <div className="star-container1 w-full justify-center items-center flex   size-4 md:size-6 lg:size-12 overflow-hidden h-full ">
+    <div className="star-container1 w-full justify-center items-center flex   size-4 md:size-6 lg:size-12 overflow-hidden h-full hover:scale-110">
       <div className="star-shape1">
         {/*size-4 md:size-6 lg:size-12  */}
         <div className="star-container2 p-5 w-full overflow-hidden">
@@ -20,7 +20,7 @@ export default function FiveStarCard({
   );
   return (
     <div
-      className={`rounded-md lg:rounded-xl cursor-pointer  lg:p-3 p-2 flex justify-between  relative overflow-hidden border backdrop-blur-sm`}
+      className={`rounded-md lg:rounded-xl cursor-pointer  lg:p-3 p-2 flex justify-between  relative overflow-hidden border border-slate-200 backdrop-blur-sm`}
     >
       <div className="absolute inset-0 z-0 h-full w-full">{background}</div>
    <div className=" flex backdrop-blur-sm rounded-xl bg-white/60 p-2 w-full">

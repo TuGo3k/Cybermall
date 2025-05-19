@@ -7,6 +7,8 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import axios from "axios";
 import toast from "react-hot-toast";
+// import getRequest from "@/app/utils/api/getRequest";
+import GradientText from "@/app/utils/GradientText";
 
 const VIPSection = () => {
   const [page, setPage] = useState(0);
@@ -60,26 +62,37 @@ const VIPSection = () => {
     <div className="flex flex-col lg:gap-10 gap-5 py-[1vw]">
       <div className="flex justify-between">
         {" "}
-        <h1 className="lg:text-3xl text-xl lg:w-[20vw] border-b-2 border-[#008ecc] lg:pb-4">
-          Онцгой зар
-        </h1>
+              <GradientText
+                  colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+                  animationSpeed={8}
+                  showBorder={false}
+                  className="custom-class animate-gradient"
+                >
+                  <h1 className="lg:text-3xl text-xl lg:w-auto border border-blue-500 p-2 rounded-2xl">
+                    Онцлох бүтээгдэхүүнүүд
+                    {/* <span className="lg:text-3xl text-[#008ecc]">Байгууллага</span> */}
+                  </h1>
+                </GradientText>
+        {/* <h1 className="lg:text-3xl text-xl lg:w-[20vw] border-b-2 border-[#008ecc] lg:pb-4">
+          
+        </h1> */}
         <div className="relative flex gap-10">
           <div className="lg:flex hidden gap-4 ">
             <button
               onClick={prevSlide}
               className="  bg-white shadow-md rounded-full px-4 hover:bg-gray-100 "
             >
-              <ChevronLeft size={20} className="text-black z-50" />
+              <ChevronLeft size={20} className="text-[#40ffaa] z-50" />
             </button>
             <button
               onClick={nextSlide}
               className=" bg-white shadow-md rounded-full px-4 hover:bg-gray-100"
             >
-              <ChevronRight size={20} className="text-black z-50" />
+              <ChevronRight size={20} className="text-[#40ffaa] z-50" />
             </button>
           </div>
 
-          <p className="flex items-center lg:text-xl gap-1 lg:gap-2 bg-white rounded-full shadow-md hover:bg-gray-100 pl-2 lg:pl-4 lg:pr-3 cursor-pointer">
+          <p className="flex items-center lg:text-xl gap-1 lg:gap-2 bg-white rounded-full shadow-md hover:bg-gray-100 pl-2 lg:pl-4 lg:pr-3 cursor-pointer  hover:text-[#008ecc] text-transparent duration-300 bg-gradient-to-r from-[#40ffaa] to-[#4079ff] bg-clip-text animate-gradient">
             view all{" "}
             <MdKeyboardArrowRight className="lg:size-5 text-[#008ecc]" />
           </p>
@@ -122,7 +135,7 @@ const VIPSection = () => {
         </button>
       </div>
 
-      <div className="bg-red-100 rounded-xl p-4 flex items-center justify-evenly ">
+      {/* <div className="bg-red-100 rounded-xl p-4 flex items-center justify-evenly ">
         <div className="lg:size-48 size-24 relative">
           <img
             src="/assets/Home/location.png"
@@ -142,7 +155,7 @@ const VIPSection = () => {
             дэлгэрэнгүй
           </p>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

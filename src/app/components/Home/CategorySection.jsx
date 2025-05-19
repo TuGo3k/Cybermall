@@ -8,6 +8,7 @@ import categoriesdata from "@/data/categoriesdata";
 import { useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import getRequest from "@/app/utils/api/getRequest";
+import GradientText from "@/app/utils/GradientText";
 const CategorySection = () => {
   const [page, setPage] = useState(0);
   const [cardWidth, setCardWidth] = useState(10); // default for base
@@ -99,9 +100,20 @@ const CategorySection = () => {
     <div className="flex flex-col lg:gap-10 gap-5 py-[1vw]">
       <div className="flex justify-between">
         {" "}
-        <h1 className="lg:text-3xl text-xl lg:w-[20vw] border-b-2 border-[#008ecc] lg:pb-4">
-          Ангилал
-        </h1>
+              <GradientText
+                  colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+                  animationSpeed={8}
+                  showBorder={false}
+                  className="custom-class animate-gradient"
+                >
+                  <h1 className="lg:text-3xl text-xl lg:w-auto border border-blue-500 p-2 rounded-2xl">
+                     Ангилал
+                    {/* <span className="lg:text-3xl text-[#008ecc]">Байгууллага</span> */}
+                  </h1>
+                </GradientText>
+        {/* <h1 className="lg:text-3xl text-xl lg:w-[20vw] border-b-2 border-[#008ecc] lg:pb-4">
+        
+        </h1> */}
         <div className="relative lg:flex gap-10 hidden">
           <div className="flex gap-4">
             <button
@@ -111,7 +123,7 @@ const CategorySection = () => {
                 page === 0 ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
-              <ChevronLeft size={20} className="text-black z-50" />
+              <ChevronLeft size={20} className="text-[#40ffaa] z-50" />
             </button>
             <button
               onClick={nextSlide}
@@ -120,7 +132,7 @@ const CategorySection = () => {
                 page === maxPage ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
-              <ChevronRight size={20} className="text-black z-50" />
+              <ChevronRight size={20} className="text-[#40ffaa] z-50" />
             </button>
           </div>
         </div>
