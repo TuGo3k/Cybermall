@@ -4,27 +4,37 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import getRequest from "./api/getRequest";
 import apiData from "@/data/apidata";
-import Particles from "./Particles";
+import { BackgroundBoxesDemo } from "@/app/components/ui/background-boxes";
+
+
 
 const CustomSwiper = ({ darkmode = false }) => {
   const [page, setPage] = useState(0);
   const [sliders, setSliders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [datas, setDatas] = useState([]);
-  const [bgcolor, setBgcolor] = useState([])
- console.log(datas)
-  useEffect(() => {
-    if(isLoading){
-      getRequest({route: '/fivestarcompany', setValue: setDatas, setIsLoading: setIsLoading})
-      setBgcolor(datas.bgcolor)
-    }
-  }, [isLoading])
+  const [bgcolor, setBgcolor] = useState([]);
+  console.log(datas);
   useEffect(() => {
     if (isLoading) {
-      getRequest({ route: '/slider', setValue: setSliders, setLoading: setIsLoading })
+      getRequest({
+        route: "/fivestarcompany",
+        setValue: setDatas,
+        setIsLoading: setIsLoading,
+      });
+      setBgcolor(datas.bgcolor);
     }
-  }, [isLoading])
-console.log(sliders)
+  }, [isLoading]);
+  useEffect(() => {
+    if (isLoading) {
+      getRequest({
+        route: "/slider",
+        setValue: setSliders,
+        setLoading: setIsLoading,
+      });
+    }
+  }, [isLoading]);
+  console.log(sliders);
   const nextSlide = () => {
     setPage((prev) => (prev + 1) % sliders.length);
   };
@@ -46,17 +56,15 @@ console.log(sliders)
   return (
     <div className="relative">
       <div className="absolute inset-0 z-10 w-full h-full ">
-  <Particles
-    particleColors={['#ffffff', '#ffffff']}
-    particleCount={200}
-    particleSpread={10}
-    speed={0.1}
-    particleBaseSize={100}
-    moveParticlesOnHover={true}
-    alphaParticles={false}
-    disableRotation={false}
-  />
+       <div class="relative h-full w-full bg-sky-100 overflow-hidden rounded-lg">
+  <div class="absolute -inset-0.5 bg-pink-300 opacity-30 blur-3xl animate-pulse"></div>
+  <div class="absolute -inset-1 bg-purple-400 opacity-20 blur-2xl"></div>
+  <div class="relative z-10 flex items-center justify-center h-full">
+    <h1 class="text-3xl font-bold text-white">Fluffy Background ✨</h1>
+  </div>
 </div>
+
+      </div>
       <button
         onClick={prevSlide}
         className="absolute -left-5  lg:-left-10 top-1/2 -translate-y-1/2 z-30 bg-white shadow-md rounded-full p-2 lg:p-7 hover:bg-gray-100 "
@@ -72,7 +80,7 @@ console.log(sliders)
 
       <div className=" lg:w-full overflow-hidden relative">
         {/* Arrows */}
-     
+
         <motion.div
           className="flex w-full relative min-h-100 "
           animate={{ x: `-${page * 100}%` }}
@@ -80,17 +88,20 @@ console.log(sliders)
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
           onDragEnd={handleDragEnd}
-
         >
           {sliders.map((testimonial, idx) => (
-            <motion.div key={idx} className="w-full flex-shrink-0 max-h-100 h-full z-20 relative">
+            <motion.div
+              key={idx}
+              className="w-full flex-shrink-0 max-h-100 h-full z-20 relative"
+            >
               <div
-                className={`p-6 rounded-lg text-center w-full transition-all duration-500 min-h-100  ${darkmode
-                  ? "bg-[#170f2f] text-white"
-                  : "bg-blue-400 text-black"
-                  } hover:bg-gradient-to-r hover:from-[#6f94e5] hover:to-[#f580a9] hover:text-black
+                className={`p-6 rounded-lg text-center w-full transition-all duration-500 min-h-100  ${
+                  darkmode
+                    ? "bg-[#170f2f] text-white"
+                    : "bg-blue-400 text-black"
+                } hover:bg-gradient-to-r hover:from-[#6f94e5] hover:to-[#f580a9] hover:text-black
                   flex justify-around items-center z-20`}
-                  style={{ backgroundColor: bgcolor }}
+                style={{ backgroundColor: bgcolor }}
               >
                 <div>
                   <p className="text-5xl font-bold text-white italic text-left">
@@ -100,21 +111,24 @@ console.log(sliders)
                     {testimonial.content}
                   </p>
                 </div>
-                <img src={apiData.file_api_url + testimonial.image} alt="" className="size-72 z-20" />
-               
+                <img
+                  src={apiData.file_api_url + testimonial.image}
+                  alt=""
+                  className="size-72 z-20"
+                />
               </div>
             </motion.div>
           ))}
         </motion.div>
-     
       </div>
       <div className="flex justify-center  gap-2 z-50 absolute bottom-5 lg:bottom-20 left-1/2 lg:left-1/10 transform  -translate-x-1/2">
         {sliders.map((_, index) => (
           <button
             key={index}
             onClick={() => setPage(index)}
-            className={`h-2 rounded-full transition-all cursor-pointer duration-300 ${index === page ? "w-6 bg-white" : "w-2 bg-white"
-              }`}
+            className={`h-2 rounded-full transition-all cursor-pointer duration-300 ${
+              index === page ? "w-6 bg-white" : "w-2 bg-white"
+            }`}
           ></button>
         ))}
       </div>

@@ -12,7 +12,7 @@ import AuthModal from "../AuthModal";
 import { useRouter } from "next/navigation";
 import { LogOut } from "lucide-react";
 import { useAuth } from "@/context/AuthProvider";
-
+import GradientText from "@/app/utils/GradientText";
 const MainHeader = () => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -59,7 +59,18 @@ const MainHeader = () => {
             href="/"
             className="text-[#008ECC] text-xl lg:text-4xl font-lg lg:font-md"
           >
-            Uilchilgee.mn
+                  <GradientText
+                      colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+                      animationSpeed={8}
+                      showBorder={false}
+                      className="custom-class animate-gradient"
+                    >
+                   
+                         Uilchilgee.mn
+                        {/* <span className="lg:text-3xl text-[#008ecc]">Байгууллага</span> */}
+                    
+                    </GradientText>
+          
           </Link>
         </div>
         <div
